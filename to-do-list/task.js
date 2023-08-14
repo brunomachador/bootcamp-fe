@@ -1,16 +1,12 @@
 const PRIORITY = require('./priority');
 
-function createTask(
-  description,
-  priority = PRIORITY.low,
-  details = null,
-  subTask = []
-) {
+function createTask(title, priority = PRIORITY.low, description = null) {
+  const today = new Date();
   return {
+    title: title,
     description: description,
-    details: details,
     priority: priority,
-    subTask: subTask,
+    createdDate: today,
     status: false,
   };
 }

@@ -3,17 +3,17 @@ const { createTask } = require('./task');
 
 let list = {
   1: {
-    description: 'Compras Mercado',
-    details: 'Compras devem ser feitas no mercado continente',
+    title: 'Compras Mercado',
+    description: 'Compras devem ser feitas no mercado continente',
     priority: PRIORITY.high,
-    subTask: ['Comprar Arroz', 'Comprar Carne', 'Comprar Chocolate'],
+    createdDate: new Date(),
     status: false,
   },
   2: {
-    description: 'Limpar a casa',
-    details: null,
+    title: 'Limpar a casa',
+    description: null,
     priority: PRIORITY.medium,
-    subTask: ['Lavar a loiça', 'Varrer o chão', 'Lavar a roupa'],
+    createdDate: new Date(),
     status: false,
   },
 };
@@ -38,20 +38,21 @@ function getCompletedList() {
   return Object.values(list).filter((task) => task.status === true);
 }
 
-function updateTask(id, description, priority, details, subTask) {
+function updateTask(id, title, priority, description, subTask) {
   list[id] = {
-    description: description ? description : list[id].description,
+    title: title ? title : list[id].title,
     priority: priority ? priority : list[id].priority,
-    details: details ? details : list[id].details,
-    subTask: subTask ? subTask : list[id].subTask,
+    description: description ? description : list[id].description,
+    createdDate: list[id].createdDate,
+    status: list[id].status,
   };
 }
 
-let task = createTask('New Task');
+let task = createTask('New Task', PRIORITY.high, 'Levar o cão até o parque');
 addTask(task);
 completeTask(1);
 completeTask(2);
-updateTask(3, 'Passear Cão', PRIORITY.medium, 'Andar no parque');
+updateTask(3, 'Passear Cão', PRIORITY.medium);
 console.log(getList());
-console.log(getTaskById(2));
-console.log(getCompletedList());
+//console.log(getTaskById(2));
+//console.log(getCompletedList());
